@@ -22,15 +22,20 @@ class User implements UserInterface
     private $id;
 
     /**
+     *@Assert\Email(
+     *     message = "The email '{{ value }}' is not a valid email."
+     * )
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
+  
+    
 
     /**
      * @ORM\Column(type="json")
      */
     private $roles = [];
-    /**
+      /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
@@ -82,6 +87,7 @@ class User implements UserInterface
 
         return $this;
     }
+   
 
     /**
      * A visual identifier that represents this user.
@@ -218,5 +224,5 @@ class User implements UserInterface
         return $this;
     }
 
-
+   
 }

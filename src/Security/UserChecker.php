@@ -17,7 +17,7 @@ class UserChecker implements UserCheckerInterface
         if (!$user instanceof AppUser) {
             return;
         }
-
+       
         // user account is expired, the user may be notified
         if ($user->isExpired()) {
             throw new CustomUserMessageAuthenticationException('your banned');
@@ -26,10 +26,10 @@ class UserChecker implements UserCheckerInterface
             // the message passed to this exception is meant to be displayed to the user
             throw new CustomUserMessageAuthenticationException
             ('you must verify your account first to login');
-
+            
         }
-
-
+        
+        
     }
 
     public function checkPostAuth(UserInterface $user): void
@@ -37,9 +37,9 @@ class UserChecker implements UserCheckerInterface
         if (!$user instanceof AppUser) {
             return;
         }
-
-
-
-
+        
+        
+        
+       
     }
 }

@@ -14,12 +14,12 @@ class AdminController extends AbstractController
 {
 
     /**
-     *
-     * @Route("/admin", name="admin_list")
-     */
+    * 
+    * @Route("/admin", name="admin_list")
+    */
     public function admin()
     {
-
+     
         $users = $this->getDoctrine()->getRepository(User::class)->findAll();
 
         return $this->render('admin/index.html.twig', [
@@ -33,53 +33,53 @@ class AdminController extends AbstractController
     }
 
     // ...*/
-    /**
+     /**
      * @Route("/admin/Delete/{id}" ,name="DELETE_USER")
      *Method({"DELETE"})
      */
     public function Delete(Request $request,$id)
     {
-        $User = $this->getDoctrine()
+            $User = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($id);
 
-        $entityManager = $this->getDoctrine()->getManager();
-        $entityManager->remove($User);
-        $entityManager->flush();
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($User);
+            $entityManager->flush();
 
-
-        return $this->redirectToRoute('admin_list');
-
+            
+            return $this->redirectToRoute('admin_list');
+            
     }
     /**
      * @Route("/admin/update/{id}" ,name="BLOCK_USER")
      *Method({"GET", "POST"})
      */
     public function Block(Request $request,$id)
-    {
-        $User = new User();
-        $User = $this->getDoctrine()
+    {       
+            $User = new User();
+            $User = $this->getDoctrine()
             ->getRepository(User::class)
             ->find($id);
 
-        $form = $this->createformbuilder($User)
+            $form = $this->createformbuilder($User)
             ->add('isExpired',CheckboxType::class, [
                 'label'    => 'BLOCK',
                 'required' => false,
             ])
             ->add('Done',SubmitType::class)
             ->getForm();
-        $form->handleRequest($request);
-        if ($form->isSubmitted() ) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->flush();
+            $form->handleRequest($request);
+            if ($form->isSubmitted() ) {
+                 $entityManager = $this->getDoctrine()->getManager();
+                 $entityManager->flush();
 
-            return $this->redirectToRoute('admin_list');
-        }
-        return $this->render('admin/update.html.twig', [
-            'form' => $form->createView()
-        ]);
-
+                return $this->redirectToRoute('admin_list');
+            }
+            return $this->render('admin/update.html.twig', [
+                'form' => $form->createView()
+               ]);
+            
     }
     /**
      * @Route("/admin/filter" ,name="filter")
@@ -87,14 +87,14 @@ class AdminController extends AbstractController
 
     public function listwhereadminfirst(){
         $users=$this->getDoctrine()
-            ->getRepository(User::class)
-            ->findusers();
+                    ->getRepository(User::class)
+                    ->findusers();
         return $this->render('admin/test.html.twig', [
-            'users' => $users
-        ]);
+                        'users' => $users
+                    ]);
     }
-
-
-
-
+    
+   
+   
+   
 }

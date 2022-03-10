@@ -82,11 +82,11 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
         // mail check validation
         //if ($user->isVerified()){
         return $this->passwordEncoder->isPasswordValid($user, $credentials['password']);
-
-
+        
+      
     }
-
-
+  
+ 
 
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
@@ -98,47 +98,47 @@ class LoginFormAuthenticator extends AbstractFormLoginAuthenticator implements P
 
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-
-
+       
+           
         $email = $this->getCredentials($request);
-        // if ( $token->getUser()->isVerified()) {
+       // if ( $token->getUser()->isVerified()) {
         if ($targetPath = $this->getTargetPath($request->getSession(), $providerKey)) {
             return new RedirectResponse($targetPath);
         }
-        $admin= $token->getuser()->getRoles();
+         $admin= $token->getuser()->getRoles();
         foreach ($admin as &$value) {
             if($value == 'ROLE_ADMIN' ){
                 return new RedirectResponse($this->urlGenerator->generate('admin_list'));
             }
             else{
-            }
-            //Get user email address
-            #if loged in  redirect to home
-            return new RedirectResponse($this->urlGenerator->generate('home'));
-
-
-            //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
         }
+        //Get user email address
+         #if loged in  redirect to home
+         return new RedirectResponse($this->urlGenerator->generate('home'));
 
+         
+         //throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
+            }
+    
     }
 
-
-
-
-
-
-
-
+    
+       
+   
+    
+        
+     
+    
 
     protected function getLoginUrl()
     {
         return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
-
+    
 
 
     //function
-
+   
 
 
 }

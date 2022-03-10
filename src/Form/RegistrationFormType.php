@@ -17,6 +17,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use ReCaptcha\ReCaptcha;
 
 class RegistrationFormType extends AbstractType
 {
@@ -25,7 +26,7 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('email',EmailType::class)
             ->add('Telephone',TelType::class)
-
+            
             ->add('username', TextType::class, [
                 'constraints' => [
                     new Length([
@@ -34,7 +35,7 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
-
+           
             ->add('plainPassword',  RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
@@ -64,8 +65,9 @@ class RegistrationFormType extends AbstractType
                     ]),
                 ],
             ])
+            
             ->add('submit',SubmitType::class)
-
+           
         ;
     }
 
